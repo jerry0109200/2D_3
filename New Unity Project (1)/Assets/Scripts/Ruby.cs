@@ -18,7 +18,10 @@ public class Ruby : MonoBehaviour
     public int maxHealth = 5;
 
     [Header("當前血量"), Range(0, 5)]
-    public int currentHelath;
+    public int currentHealth;
+
+    //【發射子彈 1】
+    public GameObject projectilePrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -27,8 +30,8 @@ public class Ruby : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         //【血量控制 2/4】
-        currentHelath = maxHealth;
-        print("Ruby當前血量為:" + currentHelath);
+        currentHealth = maxHealth;
+        print("Ruby當前血量為:" + currentHealth);
     }
 
     // Update is called once per frame
@@ -60,16 +63,37 @@ public class Ruby : MonoBehaviour
 
 
         //【血量控制 4/4】當血量為0時，重新遊戲關卡 (讀取關卡)
-        if (currentHelath == 0)
+        if (currentHealth == 0)
         {
             Application.LoadLevel("Week12_Health-2_damage");
+        }
+
+        //【發射子彈 3/3】設定發射行為的按鍵
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Launch();
         }
     }
 
     //【血量控制 3/4】
     public void ChangeHealth(int amout)
     {
-        currentHelath = currentHelath + amout;
-        print("Ruby 當前血量為:" + currentHelath);
+        currentHealth = currentHealth + amout;
+        print("Ruby 當前血量為:" + currentHealth);
+    }
+
+    //【發射子彈 2/3】
+    public void Launch()
+    {
+        GameObject projectileOnject = Instantiate(projectilePrefab,
+            rb.position, Quaternion.identity);
+
+        Bullet bullet = projectileOnject.GetComponent<Bullet>();
+
+        bullet.Launch(lookDirection, 300);
+
+
+        rubyAnimator.SetTrigger("Launch");
+
     }
 }
