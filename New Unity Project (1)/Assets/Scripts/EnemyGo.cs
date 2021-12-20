@@ -27,6 +27,9 @@ public class EnemyGo : MonoBehaviour
     //【關閉煙霧特效 1/2】：使用關閉特效機制
     public ParticleSystem smokeEffect;
 
+    private AudioSource audioSource;
+    public AudioClip hitSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +41,8 @@ public class EnemyGo : MonoBehaviour
 
         //【動畫混合樹 2/4】
         enemyAnimator = GetComponent<Animator>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -120,5 +125,7 @@ public class EnemyGo : MonoBehaviour
         //【關閉煙霧特效 2/2】
         smokeEffect.Stop();
         //Destroy(smokeEffect); //此方式也可以，但粒子會瞬間消失，沒有 fu
+
+        audioSource.PlayOneShot(hitSound);
     }
 }

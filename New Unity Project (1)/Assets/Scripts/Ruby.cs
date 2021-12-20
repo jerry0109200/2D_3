@@ -20,6 +20,15 @@ public class Ruby : MonoBehaviour
     [Header("當前血量"), Range(0, 5)]
     public int currentHealth;
 
+    //【新增音效 1】
+    private AudioSource audioSource;
+
+    //【受傷音效 1】
+    public AudioClip playerHit;
+
+    //【發射音效 2】
+    public AudioClip playershot;
+
     //【發射子彈 1】
     public GameObject projectilePrefab;
 
@@ -32,6 +41,10 @@ public class Ruby : MonoBehaviour
         //【血量控制 2/4】
         currentHealth = maxHealth;
         print("Ruby當前血量為:" + currentHealth);
+
+        //【新增音效 2】
+        audioSource = GetComponent<AudioSource>();
+
     }
 
     // Update is called once per frame
@@ -72,6 +85,8 @@ public class Ruby : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Launch();
+
+            PlaySound(playershot);
         }
     }
 
@@ -80,6 +95,13 @@ public class Ruby : MonoBehaviour
     {
         currentHealth = currentHealth + amout;
         print("Ruby 當前血量為:" + currentHealth);
+
+        //【判斷是否受傷】
+        if (amout < 0)
+        {
+            //【受傷音效 2】
+            PlaySound(playerHit);
+        }
     }
 
     //【發射子彈 2/3】
@@ -92,8 +114,11 @@ public class Ruby : MonoBehaviour
 
         bullet.Launch(lookDirection, 300);
 
-
         rubyAnimator.SetTrigger("Launch");
-
+    }
+    //【新增音效 3】
+    public void PlaySound(AudioClip audioClip)
+    {
+        audioSource.PlayOneShot(audioClip);
     }
 }
