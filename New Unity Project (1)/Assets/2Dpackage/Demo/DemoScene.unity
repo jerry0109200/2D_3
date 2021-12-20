@@ -17279,10 +17279,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3909867808609720966, guid: 0563efaf36c250d43a54ee18292e1762, type: 3}
+<<<<<<< HEAD
       propertyPath: hitSound
       value: 
       objectReference: {fileID: 8300000, guid: e7fa1971a86d60945bb64585c0ac14d5, type: 3}
     - target: {fileID: 3909867808609720966, guid: 0563efaf36c250d43a54ee18292e1762, type: 3}
+=======
+>>>>>>> 979679881ad04c17d69f10fdbd89ad9be34460ba
       propertyPath: smokeEffect
       value: 
       objectReference: {fileID: 1573259998}
